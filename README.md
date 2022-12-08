@@ -1,10 +1,7 @@
 # Trash Bin Solar Charging Station
  A trashbin project which uses 3 kinds of sensors. Each kind of material inserted in the trashbin would equate to charge duration.
 
-
-
-
-Kindly use the library included in the repository.
+Kindly use the library included in the repository. Also, please download the readme file for the better readability of the truth table.
 
 - New-LiquidCrystal-master 
 library credits to: https://github.com/fmalpartida/New-LiquidCrystal 
