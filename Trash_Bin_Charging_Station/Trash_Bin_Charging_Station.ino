@@ -1,28 +1,3 @@
-
-
-/*
-  infraredSensor LOW = detection
-  metalSensor HIGH = detection
-  plasticSensor LOW = detection
-  /------------------------------------------------------------------------/
-  Truth Table
-  1 = DETECT 0 = NO_DETECT
-  Please don't get this confused with the actual sensor input
-
-                  M   Pl  M  Pa   n
-  IR SENSOR      |1| |1| |1| |1| |0|
-  PLASTIC SENSOR |1| |1| |0| |0| |0|
-  METAL SENSOR   |1| |0| |1| |0| |0|
-
-  M = Metal       - 1 1 1
-  Pl = Plastic    - 1 1 0
-  Metal           - 1 0 1
-  Pa = Paper      - 1 0 0
-  null            - 0 0 0
-  /------------------------------------------------------------------------/
-
-*/
-
 /*LCD Library*/
 #include <LiquidCrystal_I2C.h> //library
 #include <Wire.h>
