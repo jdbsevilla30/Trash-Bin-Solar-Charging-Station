@@ -55,7 +55,7 @@ unsigned long previousMillis = 0;
 unsigned long lastPrint;
 
 /*global variable for charge time*/
-long chargeTime;
+unsigned long chargeTime;
 
 void setup()
 {
