@@ -22,6 +22,9 @@ const int plasticServoDegree = 60;
 const int paperServoDegree = 120;
 const int metalServoDegree = 180;
 
+/*Set the default servo degree. this degree should be the "closed" state of the project*/
+const int defaultServoDegree = 0;
+
 /*orange sensor*/
 const int plasticSensorPin = 2;
 int plasticSensorValue;
@@ -72,7 +75,7 @@ void setup()
   }
 
   myservo.attach(servoPin);
-  myservo.write(0, 255, true);
+  myservo.write(0, defaultServoDegree, true);
 }
 
 void loop()
@@ -114,9 +117,10 @@ void detectObjects()
       materialKind = "plastic";
     }
 
-    myservo.write(servoDegree, 255, true); // change the default position
-    myservo.write(0, 255, true);
+    myservo.write(servoDegree, 255, true); // rotate servo to desired degree
+   myservo.write(defaultServoDegree, 255, true);
     checkMaterial(materialKind, chargeTime, servoDegree);
+     
   }
 }
 
