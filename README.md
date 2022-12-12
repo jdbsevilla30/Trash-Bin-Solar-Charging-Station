@@ -17,21 +17,47 @@ https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries
 
 /**************************************************************************************************************************/
 
-Please click here to see the project's truth table in detecting objects:
-
-https://pastebin.com/7CMwEE6e
+  infraredSensor LOW = detection
+  metalSensor HIGH = detection
+  plasticSensor LOW = detection
+  /------------------------------------------------------------------------/
+  Truth Table
+  1 = DETECT 0 = NO_DETECT
+  Please don't get this confused with the actual sensor input
+ 
+                  M   Pl  M  Pa   n
+  IR SENSOR      |1| |1| |1| |1| |0|
+  PLASTIC SENSOR |1| |1| |0| |0| |0|
+  METAL SENSOR   |1| |0| |1| |0| |0|
+ 
+  M = Metal       - 1 1 1
+  Pl = Plastic    - 1 1 0
+  Metal           - 1 0 1
+  Pa = Paper      - 1 0 0
+  null            - 0 0 0
+  /------------------------------------------------------------------------/
 
 /**************************************************************************************************************************/
+
 
 /*Charge durations. these units are automatically converted in minutes*/
 const int plasticChargeDuration = 7;
 const int paperChargeDuration = 3;
 const int metalChargeDuration = 10;
 
-/*Servo degrees. change the degree direction depending on where you want the servo to rotate depending on the object detected*/
+/*Servo degrees. change na lang direction what direction the servo would go depending on the material detected*/
 const int plasticServoDegree = 60;
 const int paperServoDegree = 120;
 const int metalServoDegree = 180;
+
+/*Servo top degree for opening the lid*/
+const int servoLidDegree = 180;
+
+/*Set the default servo degree bottom. this degree should be the "closed" state of the project*/
+const int defaultServoDegreeBottom = 0;
+
+/*Set the default servo degree topm. this degree should be the "closed" state of the project*/
+const int defaultServoDegreeTop = 0;
 
 
 
