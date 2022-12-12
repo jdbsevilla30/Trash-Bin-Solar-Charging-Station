@@ -39,7 +39,6 @@ https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries
 
 /**************************************************************************************************************************/
 
-
 /*Charge durations. these units are automatically converted in minutes*/
 const int plasticChargeDuration = 7;
 const int paperChargeDuration = 3;
