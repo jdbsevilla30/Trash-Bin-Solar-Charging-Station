@@ -80,7 +80,7 @@ void setup()
   lcd.begin(16, 2);
   while (!Serial)
   {
-    ; // Wait for serial to connect
+    ; // Wait for serial to connect. dont continue serial if serial not detected
   }
 
   myServoTop.attach(servoPinTop);
