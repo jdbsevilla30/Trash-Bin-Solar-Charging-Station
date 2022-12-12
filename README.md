@@ -17,6 +17,42 @@ https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries
 
 /**************************************************************************************************************************/
 
+PROJECT PIN OUTS 
+
+LCD i2c 0x27 
+GND - GND
+VCC - 5V 
+SDA - A4 (SDA)
+SCL - A5 (SCL)
+
+Servo Bottom 
+Brown - GND
+Red - 5V
+Orange - D9 (PWM)
+
+Servo Top
+Brown - GND
+Red - 5V
+Orange - D10 (PWM)
+
+Plastic Sensor 
+D2 
+
+Metal Sensor 
+D3
+
+IR Sensor
+GND - GND
+VCC - 5V
+OUT - D5
+
+Relay Module (LOW TRIGGER) 
+VCC - 5V
+GND - 5V 
+Out - D6 
+
+/**************************************************************************************************************************/
+
   infraredSensor LOW = detection
   metalSensor HIGH = detection
   plasticSensor LOW = detection
