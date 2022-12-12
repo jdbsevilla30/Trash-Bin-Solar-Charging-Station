@@ -9,8 +9,11 @@ LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
 /*Servo library*/
 #include <VarSpeedServo.h>
-VarSpeedServo myservo;
-const int servoPin = 9; // define servo pin here
+VarSpeedServo myServoBottom;
+VarSpeedServo myServoTop;
+
+const int servoPinBottom = 9; // bottom servo
+const int servoPinTop = 10; // top servo
 
 /*Charge durations. these units are automatically converted in minutes*/
 const int plasticChargeDuration = 7;
@@ -22,8 +25,14 @@ const int plasticServoDegree = 60;
 const int paperServoDegree = 120;
 const int metalServoDegree = 180;
 
-/*Set the default servo degree. this degree should be the "closed" state of the project*/
-const int defaultServoDegree = 0;
+/*Servo top degree for opening the lid*/
+const int servoLidDegree = 180;
+
+/*Set the default servo degree bottom. this degree should be the "closed" state of the project*/
+const int defaultServoDegreeBottom = 0;
+
+/*Set the default servo degree topm. this degree should be the "closed" state of the project*/
+const int defaultServoDegreeTop = 0;
 
 /*orange sensor*/
 const int plasticSensorPin = 2;
@@ -74,8 +83,10 @@ void setup()
     ; // Wait for serial to connect
   }
 
-  myservo.attach(servoPin);
-  myservo.write(0, defaultServoDegree, true);
+  myServoTop.attach(servoPinTop);
+  myServoTop.write(0, defaultServoDegreeTop, true);
+  myServoBottom.attach(servoPinBottom);
+  myServoBottom.write(0, defaultServoDegreeBottom, true);
 }
 
 void loop()
@@ -87,8 +98,8 @@ void loop()
 void detectObjects()
 {
   String materialKind;
-  int servoDegree;
-
+  int servoBottomDegree;
+  
   plasticSensorValue = digitalRead(plasticSensorPin);
   metalSensorValue = digitalRead(metalSensorPin);
   infraredSensorValue = digitalRead(infraredSensorPin);
@@ -98,7 +109,7 @@ void detectObjects()
     if ((plasticSensorValue == P_DETECT && metalSensorValue == M_DETECT) || (plasticSensorValue == P_NO_DETECT && metalSensorValue == M_DETECT))
     {
       chargeTime += (metalChargeDuration * 60000);
-      servoDegree = metalServoDegree; // change the servo degree
+      servoBottomDegree = metalServoDegree; // change the servo degree
       materialKind = "metal";
     }
 
@@ -106,25 +117,29 @@ void detectObjects()
     {
 
       chargeTime += (paperChargeDuration * 60000);
-      servoDegree = paperServoDegree; // change the servo degree
+      servoBottomDegree = paperServoDegree; // change the servo degree
       materialKind = "paper";
     }
 
     else if (plasticSensorValue == P_DETECT && metalSensorValue == M_NO_DETECT)
     {
       chargeTime += (plasticChargeDuration * 60000);
-      servoDegree = plasticServoDegree; // change the servo degree
+      servoBottomDegree = plasticServoDegree; // change the servo degree
       materialKind = "plastic";
     }
 
-    myservo.write(servoDegree, 255, true); // rotate servo to desired degree
-   myservo.write(defaultServoDegree, 255, true);
-    checkMaterial(materialKind, chargeTime, servoDegree);
-     
+    
+    myServoBottom.write(servoBottomDegree, 255, true); // rotate servo to desired degree
+    myServoTop.write(servoLidDegree, 255, true);
+    myServoTop.write(defaultServoDegreeTop, 255, true);
+    myServoBottom.write(defaultServoDegreeBottom, 100, true);
+    
+    checkMaterial(materialKind, chargeTime, servoBottomDegree);
+
   }
 }
 
-void checkMaterial(String &material, long longVariable, int servoDegree)
+void checkMaterial(String &material, long longVariable, int servoBottomDegree)
 {
   while (longVariable >= 1000)
   {
