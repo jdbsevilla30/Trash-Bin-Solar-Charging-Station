@@ -31,7 +31,7 @@ const int servoLidDegree = 180;
 /*Set the default servo degree bottom. this degree should be the "closed" state of the project*/
 const int defaultServoDegreeBottom = 0;
 
-/*Set the default servo degree topm. this degree should be the "closed" state of the project*/
+/*Set the default servo degree top. this degree should be the "closed" state of the project*/
 const int defaultServoDegreeTop = 0;
 
 /*orange sensor*/
